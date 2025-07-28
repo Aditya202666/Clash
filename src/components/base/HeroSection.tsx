@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -13,7 +14,9 @@ export default function HeroSection() {
           Clash
         </h1>
         <p className="text-lg md:text-xl lg:text-2xl ">Discover the better choice, together.</p>
+        <Link href={'/login'}>
         <Button className="mt-2">Get Started</Button>
+        </Link>
       </div>
     </div>
   );
