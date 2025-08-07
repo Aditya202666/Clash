@@ -1,6 +1,6 @@
 "use server";
 
-import { REGISTER_ENDPOINT } from "@/lib/apiEndPoints";
+import { CHECK_CREDENTIALS_ENDPOINT, REGISTER_ENDPOINT } from "@/lib/apiEndPoints";
 import axios, { AxiosError } from "axios";
 
 export const registerAction = async (prevState: any, formData: FormData) => {
@@ -29,6 +29,45 @@ export const registerAction = async (prevState: any, formData: FormData) => {
       if (error.response?.data.statusCode === 422) {
         return {
           status: 422,
+          message: error.response?.data.message,
+          input: rawFormData,
+          errors: error.response?.data.data?.fieldErrors,
+        };
+      }
+    }
+  }
+
+  return {
+    status: 500,
+    message: "Something went wrong",
+    input: rawFormData,
+    errors: {},
+  };
+};
+export const loginAction = async (prevState: any, formData: FormData) => {
+  const rawFormData = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
+  try {
+    const { data } = await axios.post(CHECK_CREDENTIALS_ENDPOINT, rawFormData);
+
+    console.log(data, "from auth actions");
+    if (data.success === true) {
+      return {
+        status: data.statusCode,
+        success: data.success,
+        message: data.message,
+        errors: {},
+        input: rawFormData,
+      };
+    }
+  } catch (error) {
+    if (error instanceof AxiosError) {
+      if (error.response?.data.statusCode !== 500) {
+        // console.log(error.response?.data);
+        return {
+          status: error.response?.data.statusCode,
           message: error.response?.data.message,
           input: rawFormData,
           errors: error.response?.data.data?.fieldErrors,

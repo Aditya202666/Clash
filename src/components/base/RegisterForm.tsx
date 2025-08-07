@@ -66,7 +66,7 @@ export default function RegisterForm() {
           placeholder="Enter your name.."
         />
       </div>
-      <span className="text-red-500">{state.errors?.name?.[0]}</span>
+      <span className="text-red-500 text-sm">{state.errors?.name?.[0]}</span>
       <div className="flex flex-col gap-1 mt-4">
         <Label htmlFor="email">Email</Label>
         <Input
@@ -78,7 +78,7 @@ export default function RegisterForm() {
           placeholder="Enter your email.."
         />
       </div>
-      <span className="text-red-500">{state.errors?.email?.[0]}</span>
+      <span className="text-red-500 text-sm">{state.errors?.email?.[0]}</span>
 
       <div className="flex flex-col gap-1 mt-4">
         <Label htmlFor="password">Password</Label>
@@ -92,7 +92,7 @@ export default function RegisterForm() {
           placeholder="Enter your password.."
         />
       </div>
-      <span className="text-red-500">{state.errors?.password?.[0]}</span>
+      <span className="text-red-500 text-sm">{state.errors?.password?.[0]}</span>
 
       <div className="flex flex-col gap-1 mt-4">
         <Label htmlFor="confirm-password">Confirm Password</Label>
@@ -106,7 +106,7 @@ export default function RegisterForm() {
           placeholder="Confirm password.."
         />
       </div>
-      <span className="text-red-500">
+      <span className="text-red-500 text-sm">
         {state.errors?.confirm_password?.[0]}
       </span>
 
