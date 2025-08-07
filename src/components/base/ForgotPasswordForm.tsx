@@ -4,22 +4,18 @@ import React, { useEffect } from "react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import { SubmitButton } from "../common/SubmitButton";
-import { loginAction } from "@/actions/authActions";
+import { forgotPasswordAction } from "@/actions/authActions";
 import { toast } from "sonner";
-import Link from "next/link";
-import { signIn } from "next-auth/react";
 
-export default function LoginForm() {
+export default function ForgotPasswordForm() {
   type FormState = {
     status: number;
     message: string;
     input: {
       email: string;
-      password: string;
     };
     errors: {
       email?: string[];
-      password?: string[];
     };
     success: boolean;
   };
@@ -29,25 +25,18 @@ export default function LoginForm() {
     message: "",
     input: {
       email: "",
-      password: "",
     },
     errors: {},
     success: false,
   };
 
 
-  const [state, formAction] = React.useActionState(loginAction, initialState);
+  const [state, formAction] = React.useActionState(forgotPasswordAction, initialState);
 
   useEffect(() => {
     if (state.status === 200) {
-      toast.success("Logging you in...");
-
-      signIn("credentials", {
-        email: state.input?.email,
-        password: state.input?.password,
-        redirect: true,
-        callbackUrl: "/dashboard",
-      });
+      toast.success(state.message);
+          
     } else if (state.status >= 400) {
       toast.error(state.message);
     }
@@ -67,24 +56,6 @@ export default function LoginForm() {
         />
         <span className="text-sm text-red-500">{state.errors?.email?.[0]}</span>
       </div>
-      <div className="flex flex-col gap-1 mt-4">
-        <Label htmlFor="password">Password</Label>
-        <Input
-          id="password"
-          type="password"
-          required
-          defaultValue={state.input?.password}
-          name="password"
-          placeholder="Enter your password.."
-        />
-        <span className="text-sm text-red-500">
-          {state.errors?.password?.[0]}
-        </span>
-      </div>
-
-      <Link href={"/forgot-password"} className="text-right text-sm">
-        <p>Forgot password?</p>
-      </Link>
 
       <div className="mt-4">
         <SubmitButton />
