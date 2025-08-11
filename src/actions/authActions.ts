@@ -1,5 +1,6 @@
 "use server";
 
+import { auth, signOut } from "@/auth";
 import { CHECK_CREDENTIALS_ENDPOINT, FORGOT_PASSWORD_ENDPOINT, REGISTER_ENDPOINT, RESET_PASSWORD_ENDPOINT } from "@/lib/apiEndPoints";
 import axios, { AxiosError } from "axios";
 
@@ -165,3 +166,15 @@ export const resetPasswordAction = async (prevState: any, formData: FormData) =>
   };
 };
 
+export const logoutAction = async () => {
+  console.log("logout");
+   await signOut({ redirectTo: "/login" });
+} 
+
+export const getUserDataAction = async () => {
+  const session = await auth()
+  if(session?.user){
+    return session.user
+  }
+  return null
+}
