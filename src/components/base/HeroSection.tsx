@@ -2,8 +2,13 @@ import Image from "next/image";
 import React from "react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { auth } from "@/auth";
 
-export default  function HeroSection() {
+
+
+export default async function HeroSection() {
+  // const session  = await auth()
+  // console.log(session, "session")
   return (
     <div className="h-screen w-full flex justify-center items-center flex-col">
       <div>

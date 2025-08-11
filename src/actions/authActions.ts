@@ -52,7 +52,7 @@ export const loginAction = async (prevState: any, formData: FormData) => {
   try {
     const { data } = await axios.post(CHECK_CREDENTIALS_ENDPOINT, rawFormData);
 
-    console.log(data, "from auth actions");
+    console.log( "from auth actions", data, "from auth actions");
     if (data.success === true) {
       return {
         status: data.statusCode,
