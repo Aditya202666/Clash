@@ -12,3 +12,7 @@ export const RESET_PASSWORD_ENDPOINT = `${BASE_URL}/auth/reset-password`
 
 
 export const LOGOUT_ENDPOINT = `${BASE_URL}/auth/logout`
+
+
+// clash endpoints
+export const CREATE_CLASH_ENDPOINT = `${BASE_URL}/clash`

@@ -1,6 +1,6 @@
 class Env {
   static get BACKEND_URL(): string {
-    const url = process.env.BACKEND_APP_URL;
+    const url = process.env.NEXT_PUBLIC_BACKEND_APP_URL;
     if (!url) throw new Error("Missing BACKEND_APP_URL in environment variables");
     return url;
   }
