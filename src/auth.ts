@@ -6,17 +6,25 @@ import axios from "axios";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   session: {
     strategy: "jwt",
+    maxAge: 7 * 24 * 60 * 60,
+  },
+  jwt:{
+    maxAge: 7 * 24 * 60 * 60
   },
   callbacks: {
     authorized: async ({ auth }) => {
       // Logged in users are authenticated, otherwise redirect to login page
+      console.log("auth", auth);
       return !!auth;
     },
 
     async jwt({ token, user }) {
-    //   console.log("from jwt", user, "from jwt");
+
       if (user) {
-        return { ...token, ...user };
+        return {
+          ...token,
+          ...user,
+        };
       }
 
       return token;
@@ -24,18 +32,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     async session({ session, token }) {
 
-    //     console.log("from session", {
-    //     ...session,
-    //     user: {
-    //         ...token
-    //     }
-    //   }, "from session");
-
       return {
         ...session,
         user: {
-            ...token
-        }
+          id: token.id,
+          name: token.name,
+          email: token.email,
+          token: token.token,
+        },
       };
     },
   },

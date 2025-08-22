@@ -20,9 +20,9 @@ export default function UserAvatar() {
   }, []);
 
   return (
-    <Avatar className="">
-      <AvatarImage src={user?.avatar} />
-      <AvatarFallback className="bg-zinc-800 text-white font-bold">{user?.name?.[0]}</AvatarFallback>
+    <Avatar className="cursor-pointer">
+      <AvatarImage src={undefined} />
+      <AvatarFallback className="bg-zinc-800 text-white font-bold">{user?.name?.[0].toUpperCase()}</AvatarFallback>
     </Avatar>
   );
 }

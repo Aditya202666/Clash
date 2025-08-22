@@ -1,11 +1,18 @@
+import { auth } from '@/auth'
 import RegisterForm from '@/components/base/RegisterForm'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
-export default function RegisterPage() {
+export default async function RegisterPage() {
+
+  const session  = await auth()
+
+  if(session?.user){
+
+    redirect("/dashboard")
+  }
+
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="bg-white w-xl  border rounded-xl py-4 px-6">

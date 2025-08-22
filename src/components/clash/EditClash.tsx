@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import {
   Dialog,
   DialogClose,
@@ -28,11 +28,22 @@ import { CREATE_CLASH_ENDPOINT } from "@/lib/apiEndPoints";
 import axios, { AxiosError } from "axios";
 import { toast } from "sonner";
 import Image from "next/image";
-import { clearCacheAction } from "@/actions/commonActions";
 
-export default function AddClash({ token }: { token: string }) {
-  const [open, setOpen] = useState(false);
-  const [date, setDate] = React.useState<Date>();
+import {clearCacheAction} from "@/actions/commonActions";
+
+export default function AddClash({
+  token,
+  clash,
+  open,
+  setOpen,
+}: {
+  token: string;
+  clash: ClashInterface;
+  open: boolean;
+  setOpen: React.Dispatch<SetStateAction<boolean>>;
+}) {
+  const clashDate = new Date(clash.expire_at);
+  const [date, setDate] = React.useState<Date | undefined>(clashDate);
   const [loading, setLoading] = useState(false);
   const [clashErrors, setClashErrors] = useState<clashErrors>({});
   const [banner, setBanner] = useState<File | null>(null);
@@ -61,14 +72,33 @@ export default function AddClash({ token }: { token: string }) {
     clashData.append("title", title);
     clashData.append("description", description);
     clashData.append("expire_at", expire_at);
-    if (banner) clashData.append("banner", banner);
+
+    const bannerFormData = new FormData();
+    bannerFormData.append("banner", banner as File);
 
     try {
-      const { data } = await axios.post(CREATE_CLASH_ENDPOINT, clashData, {
-        headers: {
-          Authorization: token,
-        },
-      });
+
+      if (banner) {
+        const { data } = await axios.put(
+          `${CREATE_CLASH_ENDPOINT}/${clash.id}/${clash.banner_id}`,
+          bannerFormData,
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
+      }
+
+      const { data } = await axios.put(
+        `${CREATE_CLASH_ENDPOINT}/${clash.id}`,
+        clashData,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
 
       if (data.success) {
         toast.success(data.message);
@@ -83,11 +113,11 @@ export default function AddClash({ token }: { token: string }) {
 
       console.log(data);
     } catch (error) {
+      console.log(error);
       if (error instanceof AxiosError) {
         if (error.response?.status !== 500) {
           toast.error(error.response?.data.message);
           setClashErrors(error.response?.data.data.fieldErrors);
-          console.log(error.response?.data);
           console.log(clashErrors);
         }
       } else {
@@ -113,19 +143,10 @@ export default function AddClash({ token }: { token: string }) {
 
   return (
     <div className="text-end">
-      <Dialog
-        open={open}
-        onOpenChange={(isOpen) => {
-          if (!isOpen) {
-            handleClose(); // runs cleanup when dialog closes
-          } else {
-            setOpen(true); // ensures state sync when it opens
-          }
-        }}
-      >
-        <DialogTrigger asChild>
+      <Dialog open={open} onOpenChange={setOpen}>
+        {/* <DialogTrigger asChild>
           <Button className="mt-2 ">Create Clash</Button>
-        </DialogTrigger>
+        </DialogTrigger> */}
         <DialogContent
           className="sm:max-w-[425px] md:max-w-[600px] lg:max-w-[800px]"
           onInteractOutside={(e) => e.preventDefault()}
@@ -145,6 +166,7 @@ export default function AddClash({ token }: { token: string }) {
                   type="text"
                   name="title"
                   placeholder="Title"
+                  defaultValue={clash.title}
                   required
                 />
                 <span className="text-xs text-red-500">
@@ -157,6 +179,7 @@ export default function AddClash({ token }: { token: string }) {
                   id="description"
                   name="description"
                   placeholder="Description.."
+                  defaultValue={clash.description}
                 />
                 <span className="text-xs text-red-500">
                   {clashErrors.description && clashErrors.description[0]}
@@ -171,14 +194,13 @@ export default function AddClash({ token }: { token: string }) {
                     accept="image/*"
                     type="file"
                     ref={bannerRef}
-                    required
                     onChange={handleBannerChange}
                   />
                   <span className="text-xs text-red-500">
                     {clashErrors.banner && clashErrors.banner[0]}
                   </span>
                 </div>
-                {banner && (
+                {banner ? (
                   <div className="relative w-fit">
                     <Image
                       src={URL.createObjectURL(banner)}
@@ -191,6 +213,16 @@ export default function AddClash({ token }: { token: string }) {
                       strokeWidth={3}
                       className="bg-red-500 size-3  rounded-full absolute top-0 right-0 hover:scale-110  cursor-pointer"
                       onClick={handleClearBanner}
+                    />
+                  </div>
+                ) : (
+                  <div className="relative w-fit">
+                    <Image
+                      src={clash.banner.image_url}
+                      width={100}
+                      height={100}
+                      alt={"banner"}
+                      className="object-contain relative border-2 border-black rounded-md"
                     />
                   </div>
                 )}
@@ -232,7 +264,7 @@ export default function AddClash({ token }: { token: string }) {
                 </Button>
               </DialogClose>
               <Button type="submit" disabled={loading}>
-                {loading ? "Processing..." : "Add Clash"}
+                {loading ? "Processing..." : "Submit"}
               </Button>
             </DialogFooter>
           </form>

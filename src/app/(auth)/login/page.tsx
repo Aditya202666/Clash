@@ -1,8 +1,18 @@
+import { auth } from "@/auth";
 import LoginForm from "@/components/base/LoginForm";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import React from "react";
 
-export default function Login() {
+export default async function Login() {
+
+  const session  = await auth()
+
+  if(session?.user){
+
+    redirect("/dashboard")
+  }
+
   return (
     <div className="h-screen flex justify-center items-center">
       <div className="bg-white w-xl  border rounded-xl py-4 px-6">

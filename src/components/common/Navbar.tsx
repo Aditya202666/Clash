@@ -4,8 +4,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import LogoutModel from "./LogoutModel";
@@ -27,9 +25,6 @@ export default function Navbar() {
             <UserAvatar />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer" onClick={() => setOpen(true)}>Logout</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
