@@ -1,4 +1,4 @@
-import { GET_ALL_CLASHES_ENDPOINT, GET_CLASH_BY_ID_ENDPOINT } from "@/lib/apiEndPoints";
+import { GET_ALL_CLASHES_ENDPOINT, GET_CLASH_BY_ID_ENDPOINT,  } from "@/lib/apiEndPoints";
 
 export async function getClashes({ token }: { token: string }) {
   try {
@@ -20,24 +20,30 @@ export async function getClashes({ token }: { token: string }) {
     return response.data;
     
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 }
 
-export async function getClashById(id: string){
+export async function getClashItemByClashId(id: string){
 
   try {
     const res = await fetch(`${GET_CLASH_BY_ID_ENDPOINT}/${id}`)
 
-    if (!res.ok) throw new Error("Failed to fetch clash");
+    if (!res.ok) {
+        // console.log("res", res);
+      throw new Error("Failed to fetch clash");
+    };
 
     const response = await res.json();
     if (response.statusCode !== 200) throw new Error(response.message);
 
-    return response.data;
+    if(response.success){
+      // console.log(response, "response data");
+      return response.data;
+    }
     
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 
 }

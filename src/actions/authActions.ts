@@ -53,7 +53,7 @@ export const loginAction = async (prevState: any, formData: FormData) => {
   try {
     const { data } = await axios.post(CHECK_CREDENTIALS_ENDPOINT, rawFormData);
 
-    console.log( "from auth actions", data, "from auth actions");
+    // console.log( "from auth actions", data, "from auth actions");
     if (data.success === true) {
       return {
         status: data.statusCode,
@@ -92,7 +92,7 @@ export const forgotPasswordAction = async (prevState: any, formData: FormData) =
   try {
     const { data } = await axios.post(FORGOT_PASSWORD_ENDPOINT, rawFormData);
 
-    console.log(data, "from auth actions");
+    // console.log(data, "from auth actions");
     if (data.success === true) {
       return {
         status: data.statusCode,
@@ -146,7 +146,7 @@ export const resetPasswordAction = async (prevState: any, formData: FormData) =>
     }
   } catch (error) {
     if (error instanceof AxiosError) {
-      console.log(error.response?.data);
+      // console.log(error.response?.data);
       if (error.response?.data.statusCode !== 500) {
         return {
           status: 422,
@@ -167,7 +167,7 @@ export const resetPasswordAction = async (prevState: any, formData: FormData) =>
 };
 
 export const logoutAction = async () => {
-  console.log("logout");
+  // console.log("logout");
    await signOut({ redirectTo: "/login" });
 } 
 

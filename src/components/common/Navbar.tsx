@@ -8,15 +8,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import LogoutModel from "./LogoutModel";
 import UserAvatar from "./Avatar";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   return (
     <>
       <LogoutModel open={open} setOpen={setOpen} />
 
       <nav className="flex justify-between items-center px-4 md:px-6 lg:px-8 h-12">
-        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent text-center">
+        <h1 className="text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent text-center cursor-pointer" onClick={() => router.push("/dashboard")}>
           Clash
         </h1>
 

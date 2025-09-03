@@ -16,7 +16,7 @@ import { signOut } from "next-auth/react";
 export default function LogoutModel({open, setOpen}:{open:boolean, setOpen:Dispatch<SetStateAction<boolean>>}) {
 
     const logoutUser = async() => {
-        console.log("signing out");
+        // console.log("signing out");
         signOut({
             callbackUrl: "/login",
             redirect:true

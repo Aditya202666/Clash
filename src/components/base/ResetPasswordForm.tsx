@@ -33,7 +33,7 @@ export default function ResetPasswordForm() {
   const token = params.get("token")
   const email = params.get("email")
 
-  console.log(token, email)
+  // console.log(token, email)
 
   const initialState: FormState = {
     status: 0,
@@ -62,7 +62,7 @@ export default function ResetPasswordForm() {
 
     } else if (state.status >= 400) {
       toast.error(state.message);
-      console.log(state.message)
+      // console.log(state.message)
     }
   }, [state]);
 

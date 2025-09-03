@@ -14,7 +14,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     authorized: async ({ auth }) => {
       // Logged in users are authenticated, otherwise redirect to login page
-      console.log("auth", auth);
       return !!auth;
     },
 
@@ -60,7 +59,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const { data } = await axios.post(LOGIN_ENDPOINT, credentials);
         user = data?.data;
 
-        console.log("user", user, "from api");
         if (!user) {
           throw new Error("Invalid credentials.");
         }

@@ -55,7 +55,7 @@ export default function AddClash({ token }: { token: string }) {
     const description = formData.get("description") as string;
     const expire_at = date?.toISOString() as string;
 
-    console.log(expire_at);
+    // console.log(expire_at);
 
     const clashData = new FormData();
     clashData.append("title", title);
@@ -81,14 +81,14 @@ export default function AddClash({ token }: { token: string }) {
         if (bannerRef.current) bannerRef.current.value = "";
       }
 
-      console.log(data);
+      // console.log(data);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status !== 500) {
           toast.error(error.response?.data.message);
           setClashErrors(error.response?.data.data.fieldErrors);
-          console.log(error.response?.data);
-          console.log(clashErrors);
+          // console.log(error.response?.data);
+          // console.log(clashErrors);
         }
       } else {
         toast.error("Something went wrong, please try again!");
@@ -124,7 +124,7 @@ export default function AddClash({ token }: { token: string }) {
         }}
       >
         <DialogTrigger asChild>
-          <Button className="mt-2 ">Create Clash</Button>
+          <Button className="mt-2 mx-2">Create Clash</Button>
         </DialogTrigger>
         <DialogContent
           className="sm:max-w-[425px] md:max-w-[600px] lg:max-w-[800px]"

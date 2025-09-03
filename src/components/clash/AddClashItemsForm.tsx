@@ -3,15 +3,18 @@
 import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { Upload } from "lucide-react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { CREATE_CLASH_ITEM_ENDPOINT } from "@/lib/apiEndPoints";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function AddClashItemsForm({
   clash,
   token,
   id,
 }: {
-  clash: ClashInterface;
+  clash: CompleteClashInterface;
   token: string;
   id: string;
 }) {
@@ -22,6 +25,8 @@ export default function AddClashItemsForm({
   const [imageFileArray, setImageFileArray] = useState<ClashItemsForm[]>([]);
 
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleImageUpload = (ref: React.RefObject<HTMLInputElement | null>) => {
     if (ref?.current) {
@@ -47,7 +52,7 @@ export default function AddClashItemsForm({
     }
   };
 
-  const handleFormSubmit = async() => {
+  const handleFormSubmit = async () => {
     setLoading(true);
     const clashItemData = new FormData();
 
@@ -59,24 +64,39 @@ export default function AddClashItemsForm({
     });
 
     try {
+      const { data } = await axios.post(
+        `${CREATE_CLASH_ITEM_ENDPOINT}/${id}/create`,
+        clashItemData,
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
 
-        const {data} = await axios.post(`${CREATE_CLASH_ITEM_ENDPOINT}/${id}/create`, clashItemData, {
-            headers: {
-              Authorization: token,
-            },
-          });
+      if (data.success) {
+        toast.success(data.message);
+        setTimeout(() => {
+          router.push('/')
+        }, 1000);
+      }
 
-          console.log(data);
-        
+     
     } catch (error) {
-        console.log(error);
-    }finally {
-        setLoading(false);
+      if (error instanceof AxiosError) {
+        if (error.response?.status !== 500) {
+          toast.error(error.response?.data.message);
+          // console.log(error.response?.data);
+        }
+      } else {
+        toast.error("Something went wrong, please try again!");
+      }
+    } finally {
+      setLoading(false);
     }
-
   };
 
-  console.log(imageFileArray);
+  // console.log(imageFileArray);
   return (
     <main className="space-y-4 md:space-y-6 lg:space-y-8 p-4 md:p-6 lg:p-8 mx-auto">
       <header>
@@ -96,7 +116,7 @@ export default function AddClashItemsForm({
           onClick={() => handleImageUpload(imageRef1)}
         >
           {previewImageArray[0] ? (
-            <img
+            <Image
               src={previewImageArray[0]}
               alt="Preview"
               className="w-full h-full object-contain rounded-md"
@@ -125,7 +145,7 @@ export default function AddClashItemsForm({
           onClick={() => handleImageUpload(imageRef2)}
         >
           {previewImageArray[1] ? (
-            <img
+            <Image
               src={previewImageArray[1]}
               alt="Preview"
               className="w-full h-full object-contain rounded-md"
@@ -146,7 +166,14 @@ export default function AddClashItemsForm({
         </div>
       </section>
       <div className="flex items-center justify-center">
-        <Button onClick={handleFormSubmit} type="submit" className="px-6 cursor-pointer" disabled={loading}>{ loading ? "Submitting..." : "Submit"}</Button>
+        <Button
+          onClick={handleFormSubmit}
+          type="submit"
+          className="px-6 cursor-pointer"
+          disabled={loading}
+        >
+          {loading ? "Submitting..." : "Submit"}
+        </Button>
       </div>
     </main>
   );

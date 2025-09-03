@@ -18,8 +18,19 @@ const ClashCardMenu = dynamic(() => import("./ClashCardMenu"));
 export default function ClashCard({ clash, token }: { token: string, clash: ClashInterface }) {
 
   // console.log(clash);
+
+  const ExpireDate = new Date(clash.expire_at);
+  let text = "";
+
+  if (ExpireDate > new Date()) {
+    text = ExpireDate.toDateString();
+  } else {
+    text = "Expired!";
+  }
+
+
   return (
-    <Card className="w-[300px] break-inside-avoid flex flex-col gap-2 mx-auto h-fit">
+    <Card className="w-[300px] break-inside-avoid flex flex-col gap-2 h-fit">
       <CardHeader>
         <CardTitle className="line-clamp-2">{clash.title} </CardTitle>
         <CardAction>
@@ -37,7 +48,7 @@ export default function ClashCard({ clash, token }: { token: string, clash: Clas
         <p>
           Expire At:
           <span className="font-semibold ml-1">
-            {new Date(clash.expire_at).toDateString()}
+            {text}
           </span>
         </p>
       </CardContent>

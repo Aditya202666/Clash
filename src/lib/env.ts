@@ -6,7 +6,7 @@ class Env {
   }
 
   static get APP_URL(): string {
-    const url = process.env.APP_URL;
+    const url = process.env.NEXT_PUBLIC_APP_URL;
     if (!url) throw new Error("Missing APP_URL in environment variables");
     return url;
   }

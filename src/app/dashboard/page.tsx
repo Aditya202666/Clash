@@ -12,10 +12,10 @@ export default async function Dashboard() {
   });
 
   return (
-    <div className="px-4 md:px-6 lg:px-8">
+    <div className="md:px-6 lg:px-8">
       <Navbar />
       <AddClash token={session?.user?.token!} />
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-8  mt-4 p-4 md:p-6 lg:p-8">
+      <div className="flex flex-wrap mx-auto justify-center md:justify-start  gap-4 md:gap-6 lg:gap-8  mt-4 p-4 md:p-6 lg:p-8">
         {clashes.length > 0 &&
           clashes.map((clash: ClashInterface) => (
             <ClashCard

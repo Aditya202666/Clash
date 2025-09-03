@@ -18,6 +18,30 @@ interface ClashInterface {
   user_id: string;
 }
 
+interface CompleteClashInterface{
+  clash_item: ClashItem[];
+  ClashComment: ClashComment[];
+  id: string,
+  user_id: string,
+  title: string,
+  description: string,
+  expire_at: string,
+  created_at: string
+}
+
+interface ClashItem{
+  id: string,
+  image_url: string,
+  likes: number,
+  
+}
+
+interface ClashComment{
+  id: string,
+  comment: string,
+  created_at: string,
+}
+
 interface ClashItemsForm {
   image: File | null;
 }

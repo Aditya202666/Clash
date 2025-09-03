@@ -66,7 +66,7 @@ export default function AddClash({
     const description = formData.get("description") as string;
     const expire_at = date?.toISOString() as string;
 
-    console.log(expire_at);
+    // console.log(expire_at);
 
     const clashData = new FormData();
     clashData.append("title", title);
@@ -111,14 +111,14 @@ export default function AddClash({
         if (bannerRef.current) bannerRef.current.value = "";
       }
 
-      console.log(data);
+      // console.log(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error instanceof AxiosError) {
         if (error.response?.status !== 500) {
           toast.error(error.response?.data.message);
           setClashErrors(error.response?.data.data.fieldErrors);
-          console.log(clashErrors);
+          // console.log(clashErrors);
         }
       } else {
         toast.error("Something went wrong, please try again!");

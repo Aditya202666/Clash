@@ -12,7 +12,7 @@ export default function UserAvatar() {
   useEffect(() => {
     async function getUserSession() {
       const session = await getSession();
-      console.log(session);
+      // console.log(session);
       setUser(session?.user || null)
     }
 

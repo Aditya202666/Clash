@@ -9,6 +9,7 @@ declare module "next-auth" {
       email: string ;
       avatar?: string ;
       token: string ;
+      tokenExpireAt: number ;
     };
   }
 

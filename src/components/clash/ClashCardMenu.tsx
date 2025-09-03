@@ -23,6 +23,7 @@ import axios from "axios";
 import { CREATE_CLASH_ENDPOINT } from "@/lib/apiEndPoints";
 import { toast } from "sonner";
 import { clearCacheAction } from "@/actions/commonActions";
+import Env from "@/lib/env";
 const EditClash = dynamic(() => import("./EditClash"));
 
 export default function ClashCardMenu({
@@ -34,6 +35,11 @@ export default function ClashCardMenu({
 }) {
   const [open, setOpen] = React.useState(false);
   const [deleteOpen, setDeleteOpen] = React.useState(false);
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(`${Env.APP_URL}/clash/clashing/${clash.id}`)
+    toast.success("Link copied to clipboard");
+  };
 
   const handleDelete = async () => {
     const response = await axios.delete(
@@ -84,13 +90,13 @@ export default function ClashCardMenu({
 
       <DropdownMenu>
         <DropdownMenuTrigger className="outline-none">
-          <EllipsisVertical />
+          <EllipsisVertical className="cursor-pointer" />
         </DropdownMenuTrigger>
         <DropdownMenuContent>
           <DropdownMenuItem onClick={() => setOpen(true)}>
             Edit
           </DropdownMenuItem>
-          <DropdownMenuItem>Copy Link</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleCopyLink}>Copy Link</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setDeleteOpen(true)}>
             Delete
           </DropdownMenuItem>
