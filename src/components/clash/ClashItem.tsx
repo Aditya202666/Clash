@@ -54,13 +54,13 @@ export default function ClashItem({
           return (
             <Fragment key={index}>
               <div>
-                <div className="h-[250px] rounded-md flex flex-col items-center cursor-pointer">
+                <div className="h-[250px] rounded-md flex flex-col items-center cursor-pointer ">
                   <Image
                     src={item.image_url}
                     alt={`Clash ${index + 1}`}
                     width={250}
                     height={300}
-                    className="w-full h-full object-contain rounded-lg "
+                    className="w-full h-full object-contain rounded-lg  "
                   />
                 </div>
                 <div className="text-center mt-2">

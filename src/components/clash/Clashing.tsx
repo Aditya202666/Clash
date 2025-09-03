@@ -23,7 +23,7 @@ export default function Clashing({ clash }: { clash: CompleteClashInterface }) {
 
   useEffect(() => {
 
-    const isVoted = localStorage.getItem("isVoted")
+    const isVoted = localStorage.getItem(`clash-${clash.id}`);
     if (isVoted === "true" || isClashExpired ) {
       setIsVoted(true);
     }
@@ -49,7 +49,7 @@ export default function Clashing({ clash }: { clash: CompleteClashInterface }) {
     io.emit("vote", { clashID: clash.id, clashItemId });
     setClashItems((prevItems)=> prevItems.map((item) => item.id === clashItemId ? {...item, likes: item.likes + 1} : item))
     setIsVoted(true);
-    localStorage.setItem("isVoted", "true")
+    localStorage.setItem(`clash-${clash.id}`, "true")
   };
 
   const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

@@ -77,11 +77,9 @@ export default function AddClashItemsForm({
       if (data.success) {
         toast.success(data.message);
         setTimeout(() => {
-          router.push('/')
+          router.push("/dashboard");
         }, 1000);
       }
-
-     
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.response?.status !== 500) {
@@ -103,9 +101,7 @@ export default function AddClashItemsForm({
         <h1 className="text-1xl md:text-2xl lg:text-3xl font-semibold">
           {clash.title}
         </h1>
-        <p className="text-xs  ">
-          {clash.description}{" "}
-        </p>
+        <p className="text-xs  ">{clash.description} </p>
       </header>
       <section className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 lg:gap-12">
         <div
@@ -116,6 +112,8 @@ export default function AddClashItemsForm({
             <Image
               src={previewImageArray[0]}
               alt="Preview"
+              width={250}
+              height={300}
               className="w-full h-full object-contain rounded-md"
             />
           ) : (
@@ -145,6 +143,8 @@ export default function AddClashItemsForm({
             <Image
               src={previewImageArray[1]}
               alt="Preview"
+              width={250}
+              height={300}
               className="w-full h-full object-contain rounded-md"
             />
           ) : (
