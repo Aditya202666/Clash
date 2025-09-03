@@ -104,10 +104,7 @@ export default function AddClashItemsForm({
           {clash.title}
         </h1>
         <p className="text-xs  ">
-          {clash.description} Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Quos maxime asperiores eius harum porro vero est. Esse illo amet
-          itaque inventore modi doloremque beatae magnam rerum suscipit ab.
-          Nostrum, similique?{" "}
+          {clash.description}{" "}
         </p>
       </header>
       <section className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 lg:gap-12">
