@@ -7,7 +7,7 @@ export async function getClashes({ token }: { token: string }) {
         Authorization: token,
       },
       next: {
-        revalidate: 2,
+        revalidate: 1000 * 60 * 60,
         tags: ["dashboard"],
       },
     });

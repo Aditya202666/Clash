@@ -1,3 +1,5 @@
+// * use export const runtime = "nodejs"; // if you are using params without promise syntax 
+
 import { auth } from "@/auth";
 import AddClashItemsForm from "@/components/clash/AddClashItemsForm";
 import ClashItem from "@/components/clash/ClashItem";
