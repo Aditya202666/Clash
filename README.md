@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ⚡ Clash – Anonymous Voting & Feedback App  
 
-## Getting Started
+## 🧪 Test Account  
+You can try Clash instantly using the following test credentials:  
 
-First, run the development server:
+- **Email:** `pigima9170@blaxion.com`  
+- **Password:** `123123123`  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Clash is a full-stack web application that allows users to **upload two images, set an expiry date, and share a link** to gather **real-time, anonymous votes and comments**.  
+It’s designed to help with **A/B testing** (e.g., thumbnails, designs, mockups) by collecting unbiased feedback.  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🚀 Features  
+- 🗳️ **Anonymous Feedback** – Users can vote and comment without revealing identity  
+- ⚡ **Real-Time Updates** – Votes & comments update instantly with Socket.io  
+- 🔐 **Authentication & Security**  
+  - 2FA with email verification  
+  - Forgot password flow  
+  - JWT-based authentication  
+  - Helmet & rate limiting for security  
+- 📩 **Scalable Background Jobs** – Redis + BullMQ handle:  
+  - Image uploads  
+  - Email notifications  
+  - Vote & comment processing  
+- 🖼 **Image Upload & Storage** – Cloudinary integration  
+- 🛠 **Robust Infrastructure** – PostgreSQL with Prisma ORM & Zod for schema validation  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Tech Stack  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Backend  
+- **Node.js**, **TypeScript**, **Express.js**  
+- **PostgreSQL** + **Prisma ORM**  
+- **Redis** + **BullMQ** (job queues)  
+- **Zod** (validation)  
+- **EJS** (email templates)  
+- **Nodemailer** (email delivery)  
+- **Cloudinary** (image storage)  
+- **JWT** (authentication)  
+- **Socket.io** (real-time votes & comments)  
+- **Helmet**, **Rate Limiter** (security)  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Frontend  
+- **React.js**, **Next.js**, **TypeScript**  
+- **ShadCN/UI**, **TailwindCSS**  
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📸 How Clash Works  
+1. Upload two images and set an expiry date.  
+2. Share the generated link with others.  
+3. Collect **votes and comments anonymously**.  
+4. See results update in **real-time**.  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 💡 Key Learnings  
+- Designing **real-time event-driven systems** with Socket.io  
+- Implementing **secure authentication flows** with 2FA & JWT  
+- Handling **background jobs & queues** efficiently with Redis + BullMQ  
+- Structuring a **production-grade full-stack TypeScript app**  
+
+---
+
+## 🔮 Future Improvements  
+- 📊 Detailed analytics for votes & comments  
+- 📱 Mobile-friendly PWA version  
+- 👥 Group voting sessions  
+- 🌐 Multi-language support  
+
+---
+
+## 🧑‍💻 Author  
+**Aditya Kumar**  
+- 🌐 [Portfolio](https://portfolio-rq9c.onrender.com/)  
+- 💻 [GitHub](https://github.com/Aditya202666)  
+- 🔗 [LinkedIn](https://www.linkedin.com/in/aditya-kumar-614007361/)  
+
+---
+
+## 📜 License  
+This project is licensed under the **MIT License** – feel free to use, modify, and share.  
+
+---
+
+👉 *If there’s interest, I’ll continue polishing and extending Clash further based on feedback.*  
