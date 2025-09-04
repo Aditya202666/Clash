@@ -14,8 +14,8 @@ export default function Clashing({ clash }: { clash: CompleteClashInterface }) {
   const [ClashItems, setClashItems] = useState(clash.clash_item);
   const [commentInput, setCommentInput] = useState("");
   const [comments, setComments] = useState(clash.ClashComment);
-  const [isVoted, setIsVoted] = useState(false);
   const [isClashExpired, setIsClashExpired] = useState(new Date(clash.expire_at) < new Date());
+  const [isVoted, setIsVoted] = useState(isClashExpired);
 
   const io = getSocket();
 
@@ -119,7 +119,7 @@ export default function Clashing({ clash }: { clash: CompleteClashInterface }) {
         })}
       </section>
 
-      <form onSubmit={handleCommentSubmit}>
+      {!isClashExpired && <form onSubmit={handleCommentSubmit}>
         <Textarea
           placeholder="Write your suggestions..."
           name="comment"
@@ -131,7 +131,7 @@ export default function Clashing({ clash }: { clash: CompleteClashInterface }) {
           onChange={(e) => setCommentInput(e.target.value)}
         />
         <Button className="flex ml-auto mt-2">Submit</Button>
-      </form>
+      </form>}
       <section>
         <div className="space-y-4 md:space-y-6 lg:space-y-8 mx-auto">
           <h2 className="text-lg md:text-xl lg:text-2xl font-semibold">
