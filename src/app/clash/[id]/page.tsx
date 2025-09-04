@@ -6,7 +6,7 @@ import { getClashItemByClashId } from "@/fetch/clashFetch";
 import React from "react";
 
 export default async function Clash({ params }: { params: { id: string } }) {
-  const { id } = await params;
+  const { id } =  params;
   const clash: CompleteClashInterface = await getClashItemByClashId(id);
   const session = await auth();
 
