@@ -1,6 +1,6 @@
 import ResetPasswordForm from "@/components/base/ResetPasswordForm";
 import Link from "next/link";
-import React from "react";
+import React, { Suspense } from "react";
 
 export default function ResetPassword() {
 
@@ -14,8 +14,9 @@ export default function ResetPassword() {
         </h1>
         <h2 className="text-lg md:text-xl lg:text-2xl font-medium">Reset Password!</h2>
         <p>Enter the new password you want to use. </p>
-
+        <Suspense fallback={<div>Loading...</div>}>
         <ResetPasswordForm />
+        </Suspense>
         <p className="mt-4 text-center">
           Don't have an account?{" "}
           <Link href="/register" className="font-bold">
