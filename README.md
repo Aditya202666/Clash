@@ -17,6 +17,7 @@ It’s designed to help with **A/B testing** (e.g., thumbnails, designs, mockups
 - 🗳️ **Anonymous Feedback** – Users can vote and comment without revealing identity  
 - ⚡ **Real-Time Updates** – Votes & comments update instantly with Socket.io  
 - 🔐 **Authentication & Security**  
+  - NextAuth.js for seamless authentication  
   - 2FA with email verification  
   - Forgot password flow  
   - JWT-based authentication  
@@ -46,6 +47,7 @@ It’s designed to help with **A/B testing** (e.g., thumbnails, designs, mockups
 
 ### Frontend  
 - **React.js**, **Next.js**, **TypeScript**  
+- **NextAuth.js** (authentication)  
 - **ShadCN/UI**, **TailwindCSS**  
 
 ---
@@ -60,7 +62,7 @@ It’s designed to help with **A/B testing** (e.g., thumbnails, designs, mockups
 
 ## 💡 Key Learnings  
 - Designing **real-time event-driven systems** with Socket.io  
-- Implementing **secure authentication flows** with 2FA & JWT  
+- Implementing **secure authentication flows** with NextAuth.js & 2FA  
 - Handling **background jobs & queues** efficiently with Redis + BullMQ  
 - Structuring a **production-grade full-stack TypeScript app**  
 
