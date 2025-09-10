@@ -16,14 +16,17 @@ export default async function Dashboard() {
       <Navbar />
       <AddClash token={session?.user?.token!} />
       <div className="flex flex-wrap mx-auto justify-center md:justify-start  gap-4 md:gap-6 lg:gap-8  mt-4 p-4 md:p-6 lg:p-8">
-        {clashes.length > 0 &&
+        {clashes && clashes.length > 0 ? (
           clashes.map((clash: ClashInterface) => (
             <ClashCard
               key={clash.id}
               clash={clash}
               token={session?.user?.token!}
             />
-          ))}
+          ))
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
