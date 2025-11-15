@@ -1,6 +1,6 @@
 # ⚡ Clash – Anonymous Voting & Feedback App  
 
- **Note from future:-** This may not work because this app uses UpStash Redis server for queue, Upstash automatically deletes the unused project after sometime. I will try to keep it running. 
+ **Note from future:-** This may not work because this app uses UpStash Redis server for queue, because free commands for this month may have been already used. 
 
 ## 🧪 Test Account  
 You can try Clash instantly using the following test credentials:  
